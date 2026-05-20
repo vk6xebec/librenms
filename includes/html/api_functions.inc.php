@@ -444,6 +444,7 @@ function add_device(Illuminate\Http\Request $request)
             'snmpver',
             'port_association_mode',
             'community',
+            'context_name',
             'authlevel',
             'authname',
             'authpass',

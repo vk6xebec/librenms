@@ -29,6 +29,7 @@ if (isset($_POST['editing'])) {
                 $device->authlevel = $_POST['authlevel'];
                 $device->authname = $_POST['authname'];
                 $device->authpass = $_POST['authpass'];
+                $device->context_name = trim(strip_tags((string) ($_POST['context_name'] ?? ''))) ?: null;
                 $device->cryptoalgo = $_POST['cryptoalgo'];
                 $device->cryptopass = $_POST['cryptopass'];
             } elseif ($_POST['community'] != '********') {
@@ -323,7 +324,7 @@ echo "        </select>
     <div class='col-sm-4'>
     <select id='authalgo' name='authalgo' class='form-control'>";
 foreach (\LibreNMS\SNMPCapabilities::authAlgorithms() as $algo => $enabled) {
-    echo "<option value='$algo' " . (strcasecmp((string) $device->authalgo,(string) $algo) == 0 ? 'selected' : '') . ($enabled ? '' : ' disabled') . ">$algo</option>\n";
+    echo "<option value='$algo' " . (strcasecmp((string) $device->authalgo,(string) $algo) == 0 ? 'selected' : '') . ($enabled ? '' : ' disabled') . '>' . \LibreNMS\SNMPCapabilities::authAlgorithmLabel($algo) . "</option>\n";
 }
 echo '</select>';
 
@@ -331,6 +332,12 @@ if (! \LibreNMS\SNMPCapabilities::supportsSHA2()) {
     echo '<label class="text-left"><small>Some options are disabled. <a href="https://docs.librenms.org/Support/FAQ/#optional-requirements-for-snmpv3-sha2-auth">Read more here</a></small></label>';
 }
 echo "
+    </div>
+    </div>
+    <div class='form-group'>
+    <label for='context_name' class='col-sm-2 control-label'>Context Name</label>
+    <div class='col-sm-4'>
+    <input type='text' id='context_name' name='context_name' class='form-control' value='" . htmlspecialchars($device->context_name ?? '') . "' placeholder='optional' autocomplete='off'>
     </div>
     </div>
     <div class='form-group'>
@@ -345,7 +352,7 @@ echo "
     <select id='cryptoalgo' name='cryptoalgo' class='form-control'>";
 
 foreach (\LibreNMS\SNMPCapabilities::cryptoAlgoritms() as $algo => $enabled) {
-    echo "<option value='$algo' " . (strcasecmp((string) $device->cryptoalgo,(string) $algo) == 0 ? 'selected' : '') . ($enabled ? '' : ' disabled') . ">$algo</option>\n";
+    echo "<option value='$algo' " . (strcasecmp((string) $device->cryptoalgo,(string) $algo) == 0 ? 'selected' : '') . ($enabled ? '' : ' disabled') . '>' . \LibreNMS\SNMPCapabilities::cryptoAlgorithmLabel($algo) . "</option>\n";
 }
 echo '</select>
     ';

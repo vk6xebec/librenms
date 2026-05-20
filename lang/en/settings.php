@@ -2247,6 +2247,7 @@ return [
                     'authlevel' => 'Level',
                     'authname' => 'Username',
                     'authpass' => 'Password',
+                    'context_name' => 'Context Name',
                     'cryptoalgo' => 'Algorithm',
                     'cryptopass' => 'Password',
                 ],

@@ -69,6 +69,16 @@ class SNMPCapabilities
         return array_keys(array_filter(self::cryptoAlgoritms()));
     }
 
+    public static function authAlgorithmLabel(string $algorithm): string
+    {
+        return $algorithm === 'SHA' ? 'SHA-1' : $algorithm;
+    }
+
+    public static function cryptoAlgorithmLabel(string $algorithm): string
+    {
+        return $algorithm === 'AES' ? 'AES-128' : $algorithm;
+    }
+
     public static function authAlgorithms(): array
     {
         $sha2 = self::supportsSHA2();

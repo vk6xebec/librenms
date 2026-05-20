@@ -6996,6 +6996,7 @@
                     "authlevel": "noAuthNoPriv",
                     "authname": "root",
                     "authpass": "",
+                    "context_name": "",
                     "cryptoalgo": "AES",
                     "cryptopass": ""
                 }
@@ -7003,6 +7004,7 @@
             "validate": {
                 "value": "array",
                 "value.*.authalgo": "in:MD5,SHA,SHA-224,SHA-256,SHA-384,SHA-512",
+                "value.*.context_name": "nullable|string|max:128",
                 "value.*.cryptoalgo": "in:AES,AES-192,AES-256,AES-256-C,DES"
             }
         },

@@ -798,6 +798,7 @@ CREATE TABLE `devices` (
   `ip` varbinary(16) DEFAULT NULL,
   `overwrite_ip` varchar(40) DEFAULT NULL,
   `community` varchar(255) DEFAULT NULL,
+  `context_name` varchar(128) DEFAULT NULL,
   `authlevel` enum('noAuthNoPriv','authNoPriv','authPriv') DEFAULT NULL,
   `authname` varchar(64) DEFAULT NULL,
   `authpass` varchar(64) DEFAULT NULL,

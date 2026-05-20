@@ -573,7 +573,10 @@ function snmp_gen_auth(&$device, $cmd = [])
 {
     if ($device['snmpver'] === 'v3') {
         array_push($cmd, '-v3', '-l', $device['authlevel']);
-        array_push($cmd, '-n', $device['context_name'] ?? '');
+        $context = $device['context_name'] ?? '';
+        if ($context !== '') {
+            array_push($cmd, '-n', $context);
+        }
 
         $authlevel = strtolower((string) $device['authlevel']);
         if ($authlevel === 'noauthnopriv') {

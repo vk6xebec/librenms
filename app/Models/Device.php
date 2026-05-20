@@ -50,6 +50,7 @@ class Device extends BaseModel
         'authname',
         'authpass',
         'community',
+        'context_name',
         'cryptoalgo',
         'cryptopass',
         'disable_notify',

@@ -1,0 +1,17 @@
+os: timemachines
+text: 'TimeMachines'
+type: timing
+group: unix
+icon: clock
+mib_dir: timemachines
+over:
+    - { graph: device_processor, text: 'Processor Usage' }
+    - { graph: device_mempool, text: 'Memory Usage' }
+    - { graph: device_storage, text: 'Storage Usage' }
+discovery:
+    -
+        sysObjectID: .1.3.6.1.4.1.8072.3.2.10
+        snmpget:
+            oid: .1.3.6.1.4.1.54414.1.1.13
+            op: contains
+            value: UTC

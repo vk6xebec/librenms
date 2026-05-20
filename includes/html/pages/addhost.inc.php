@@ -61,6 +61,7 @@ if (! empty($_POST['hostname'])) {
                 $new_device->authname = $_POST['authname'];
                 $new_device->authpass = $_POST['authpass'];
                 $new_device->authalgo = strip_tags((string) $_POST['authalgo']);
+                $new_device->context_name = trim(strip_tags((string) ($_POST['context_name'] ?? ''))) ?: null;
                 $new_device->cryptopass = $_POST['cryptopass'];
                 $new_device->cryptoalgo = $_POST['cryptoalgo'];
 
@@ -238,13 +239,19 @@ foreach (PortAssociationMode::getModes() as $mode) {
                   <?php
                   $algo_pref = LibrenmsConfig::get('snmp.v3.0.authalgo');
                   foreach (\LibreNMS\SNMPCapabilities::authAlgorithms() as $algo => $enabled) {
-                      echo "<option value=\"$algo\"" . ($enabled ? '' : ' disabled') . ($algo == $algo_pref ? ' selected' : '') . ">$algo</option>";
+                      echo "<option value=\"$algo\"" . ($enabled ? '' : ' disabled') . ($algo == $algo_pref ? ' selected' : '') . '>' . \LibreNMS\SNMPCapabilities::authAlgorithmLabel($algo) . '</option>';
                   }
                   ?>
               </select>
               <?php if (! \LibreNMS\SNMPCapabilities::supportsSHA2()) {?>
               <label class="text-left"><small>Some options are disabled. <a href="https://docs.librenms.org/Support/FAQ/#optional-requirements-for-snmpv3-sha2-auth">Read more here</a></small></label>
               <?php } ?>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="context_name" class="col-sm-3 control-label">Context Name</label>
+            <div class="col-sm-9">
+              <input type="text" name="context_name" id="context_name" placeholder="Context Name (optional)" class="form-control input-sm" autocomplete="off">
             </div>
           </div>
           <div class="form-group">
@@ -260,7 +267,7 @@ foreach (PortAssociationMode::getModes() as $mode) {
                   <?php
                   $algo_pref = LibrenmsConfig::get('snmp.v3.0.cryptoalgo');
                   foreach (\LibreNMS\SNMPCapabilities::cryptoAlgoritms() as $algo => $enabled) {
-                      echo "<option value=\"$algo\"" . ($enabled ? '' : ' disabled') . ($algo == $algo_pref ? ' selected' : '') . ">$algo</option>";
+                      echo "<option value=\"$algo\"" . ($enabled ? '' : ' disabled') . ($algo == $algo_pref ? ' selected' : '') . '>' . \LibreNMS\SNMPCapabilities::cryptoAlgorithmLabel($algo) . '</option>';
                   }
                   ?>
               </select>

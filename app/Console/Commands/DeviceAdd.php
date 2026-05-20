@@ -60,6 +60,7 @@ class DeviceAdd extends LnmsCommand
         $this->addOption('security-name', 'u', InputOption::VALUE_REQUIRED, '', 'root');
         $this->addOption('auth-password', 'A', InputOption::VALUE_REQUIRED);
         $this->addOption('auth-protocol', 'a', InputOption::VALUE_REQUIRED, '', 'MD5');
+        $this->addOption('context', null, InputOption::VALUE_REQUIRED);
         $this->addOption('privacy-password', 'X', InputOption::VALUE_REQUIRED);
         $this->addOption('privacy-protocol', 'x', InputOption::VALUE_REQUIRED, '', 'AES');
         $this->addOption('force', 'f', InputOption::VALUE_NONE);
@@ -99,6 +100,7 @@ class DeviceAdd extends LnmsCommand
             'authname' => $this->option('security-name'),
             'authpass' => $this->option('auth-password'),
             'authalgo' => $this->option('auth-protocol'),
+            'context_name' => $this->option('context'),
             'cryptopass' => $this->option('privacy-password'),
             'cryptoalgo' => $this->option('privacy-protocol'),
         ]);

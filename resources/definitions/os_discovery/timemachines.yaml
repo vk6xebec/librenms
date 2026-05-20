@@ -1,0 +1,79 @@
+modules:
+    os:
+        hardware: 'TimeMachines TM2000A'
+    sensors:
+        count:
+            data:
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.1
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.1{{ $noindex }}'
+                    descr: 'NTP Client Lookups'
+                    index: 'tmiNTPCount.0'
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.2
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.2{{ $noindex }}'
+                    descr: 'NTP Stratum'
+                    index: 'tmiNTPStratum.0'
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.5
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.5{{ $noindex }}'
+                    descr: 'GPS Altitude'
+                    index: 'tmiGPSAltitude.0'
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.7
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.7{{ $noindex }}'
+                    descr: 'GPS Holdover Time'
+                    index: 'tmiGPSHoldovertime.0'
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.11
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.11{{ $noindex }}'
+                    descr: 'GPS Satellites Used'
+                    index: 'tmiGPSSatsUsed.0'
+        state:
+            data:
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.6
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.6{{ $noindex }}'
+                    descr: 'GPS Fix'
+                    index: 'tmiGPSFix.0'
+                    state_name: tmiGPSFix
+                    states:
+                        - { value: 0, generic: 2, descr: 'No Lock' }
+                        - { value: 1, generic: 1, descr: '2D Lock' }
+                        - { value: 2, generic: 0, descr: '3D Lock' }
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.3
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.3{{ $noindex }}'
+                    descr: 'Peer Synced'
+                    index: 'tmiNTPPeerSynced.0'
+                    state_name: tmiNTPPeerSynced
+                    states:
+                        - { value: 0, generic: 0, descr: 'No' }
+                        - { value: 1, generic: 0, descr: 'Yes' }
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.12
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.12{{ $noindex }}'
+                    descr: 'GPS Time Known'
+                    index: 'tmiGPSTimeKnown.0'
+                    state_name: tmiGPSTimeKnown
+                    states:
+                        - { value: 0, generic: 2, descr: 'No' }
+                        - { value: 1, generic: 0, descr: 'Yes' }
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.14
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.14{{ $noindex }}'
+                    descr: 'Peer Sync Failure'
+                    index: 'tmiPeerSyncFail.0'
+                    state_name: tmiPeerSyncFail
+                    states:
+                        - { value: 0, generic: 0, descr: 'No' }
+                        - { value: 1, generic: 2, descr: 'Yes' }
+                -
+                    oid: .1.3.6.1.4.1.54414.1.1.15
+                    num_oid: '.1.3.6.1.4.1.54414.1.1.15{{ $noindex }}'
+                    descr: 'Holdover Expired'
+                    index: 'tmiHoldoverExpired.0'
+                    state_name: tmiHoldoverExpired
+                    states:
+                        - { value: 0, generic: 0, descr: 'No' }
+                        - { value: 1, generic: 2, descr: 'Yes' }

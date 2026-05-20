@@ -43,13 +43,20 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="context_name" class="col-sm-3 control-label" v-text="$t('settings.settings.snmp.v3.fields.context_name')"></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="context_name" :value="item.context_name" @input="updateItem(id, $event.target.id, $event.target.value)">
+                    </div>
+                </div>
+
                 <fieldset name="algo" v-show="item.authlevel.toString().substring(0, 4) === 'auth'" :disabled="disabled">
                     <legend class="h4" v-text="$t('settings.settings.snmp.v3.auth')"></legend>
                     <div class="form-group">
                         <label for="authalgo" class="col-sm-3 control-label" v-text="$t('settings.settings.snmp.v3.fields.authalgo')"></label>
                         <div class="col-sm-9">
                         <select class="form-control" id="authalgo" name="authalgo" v-model="item.authalgo" @change="updateItem(id, $event.target.id, $event.target.value)">
-                            <option v-for="name in authAlgorithms" :value="name" v-text="name"></option>
+                            <option v-for="name in authAlgorithms" :value="name" v-text="authAlgorithmLabels[name] || name"></option>
                         </select>
                         </div>
                     </div>
@@ -73,7 +80,7 @@
                         <label for="cryptoalgo" class="col-sm-3 control-label">Cryptoalgo</label>
                         <div class="col-sm-9">
                         <select class="form-control" id="cryptoalgo" v-model="item.cryptoalgo" @change="updateItem(id, $event.target.id, $event.target.value)">
-                            <option v-for="name in cryptoAlgorithms" :value="name" v-text="name"></option>
+                            <option v-for="name in cryptoAlgorithms" :value="name" v-text="cryptoAlgorithmLabels[name] || name"></option>
                         </select>
                         </div>
 
@@ -111,12 +118,16 @@ export default {
                 localList: this.value,
                 authAlgorithms: ['MD5', 'AES'],
                 cryptoAlgorithms: ['AES', 'DES'],
+                authAlgorithmLabels: { SHA: 'SHA-1' },
+                cryptoAlgorithmLabels: { AES: 'AES-128' },
             }
         },
         mounted() {
             axios.get(route('snmp.capabilities')).then((res) => {
                 this.authAlgorithms = res.data.auth;
                 this.cryptoAlgorithms = res.data.crypto;
+                this.authAlgorithmLabels = res.data.auth_labels;
+                this.cryptoAlgorithmLabels = res.data.crypto_labels;
             })
         },
         methods: {
@@ -124,6 +135,7 @@ export default {
                 this.localList.push({
                     authlevel: 'noAuthNoPriv',
                     authalgo: 'MD5',
+                    context_name: '',
                     authname: '',
                     authpass: '',
                     cryptoalgo: 'AES',

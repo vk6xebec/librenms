@@ -1666,6 +1666,7 @@ CREATE TABLE IF NOT EXISTS "devices"(
   "sysName" varchar,
   "ip" blob,
   "community" varchar,
+  "context_name" varchar,
   "authlevel" varchar,
   "authname" varchar,
   "authpass" varchar,

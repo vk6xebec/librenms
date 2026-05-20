@@ -34,7 +34,13 @@ class SnmpCapabilities
     {
         return new JsonResponse([
             'auth' => \LibreNMS\SNMPCapabilities::supportedAuthAlgorithms(),
+            'auth_labels' => collect(\LibreNMS\SNMPCapabilities::supportedAuthAlgorithms())
+                ->mapWithKeys(fn ($algorithm) => [$algorithm => \LibreNMS\SNMPCapabilities::authAlgorithmLabel($algorithm)])
+                ->all(),
             'crypto' => \LibreNMS\SNMPCapabilities::supportedCryptoAlgorithms(),
+            'crypto_labels' => collect(\LibreNMS\SNMPCapabilities::supportedCryptoAlgorithms())
+                ->mapWithKeys(fn ($algorithm) => [$algorithm => \LibreNMS\SNMPCapabilities::cryptoAlgorithmLabel($algorithm)])
+                ->all(),
         ]);
     }
 }
