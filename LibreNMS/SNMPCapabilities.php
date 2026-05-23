@@ -71,12 +71,22 @@ class SNMPCapabilities
 
     public static function authAlgorithmLabel(string $algorithm): string
     {
-        return $algorithm === 'SHA' ? 'SHA-1' : $algorithm;
+        return $algorithm;
     }
 
     public static function cryptoAlgorithmLabel(string $algorithm): string
     {
-        return $algorithm === 'AES' ? 'AES-128' : $algorithm;
+        return $algorithm;
+    }
+
+    public static function normalizeAuthAlgorithm(?string $algorithm): ?string
+    {
+        return $algorithm === 'SHA-1' ? 'SHA' : $algorithm;
+    }
+
+    public static function normalizeCryptoAlgorithm(?string $algorithm): ?string
+    {
+        return $algorithm === 'AES-128' ? 'AES' : $algorithm;
     }
 
     public static function authAlgorithms(): array
@@ -85,6 +95,7 @@ class SNMPCapabilities
 
         return [
             'SHA' => true,
+            'SHA-1' => true,
             'SHA-224' => $sha2,
             'SHA-256' => $sha2,
             'SHA-384' => $sha2,
@@ -99,6 +110,7 @@ class SNMPCapabilities
 
         return [
             'AES' => true,
+            'AES-128' => true,
             'AES-192' => $aes256,
             'AES-256' => $aes256,
             'AES-256-C' => $aes256,

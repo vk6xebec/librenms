@@ -25,12 +25,12 @@ if (isset($_POST['editing'])) {
 
             if ($device->snmpver == 'v3') {
                 $device->community = ''; // if v3 works, we don't need a community
-                $device->authalgo = $_POST['authalgo'];
+                $device->authalgo = \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm($_POST['authalgo']);
                 $device->authlevel = $_POST['authlevel'];
                 $device->authname = $_POST['authname'];
                 $device->authpass = $_POST['authpass'];
                 $device->context_name = trim(strip_tags((string) ($_POST['context_name'] ?? ''))) ?: null;
-                $device->cryptoalgo = $_POST['cryptoalgo'];
+                $device->cryptoalgo = \LibreNMS\SNMPCapabilities::normalizeCryptoAlgorithm($_POST['cryptoalgo']);
                 $device->cryptopass = $_POST['cryptopass'];
             } elseif ($_POST['community'] != '********') {
                 $device->community = $_POST['community'];
@@ -335,12 +335,6 @@ echo "
     </div>
     </div>
     <div class='form-group'>
-    <label for='context_name' class='col-sm-2 control-label'>Context Name</label>
-    <div class='col-sm-4'>
-    <input type='text' id='context_name' name='context_name' class='form-control' value='" . htmlspecialchars($device->context_name ?? '') . "' placeholder='optional' autocomplete='off'>
-    </div>
-    </div>
-    <div class='form-group'>
     <label for='cryptopass' class='col-sm-2 control-label'>Crypto Password</label>
     <div class='col-sm-4'>
     <input type='password' id='cryptopass' name='cryptopass' class='form-control' value='" . htmlspecialchars($device->cryptopass ?? '') . "' autocomplete='off'>
@@ -360,6 +354,13 @@ if (! \LibreNMS\SNMPCapabilities::supportsAES256()) {
     echo '<label class="text-left"><small>Some options are disabled. <a href="https://docs.librenms.org/Support/FAQ/#optional-requirements-for-snmpv3-sha2-auth">Read more here</a></small></label>';
 }
     echo '
+    </div>
+    </div>
+    <div class="form-group">
+    <label for="context_name" class="col-sm-2 control-label">Context Name</label>
+    <div class="col-sm-4">
+    <input type="text" id="context_name" name="context_name" class="form-control" value="' . htmlspecialchars($device->context_name ?? '') . '" placeholder="optional" autocomplete="off">
+    <span class="help-block">Only set this if your device requires a context name, for example "Jetdirect" for HP LaserJet printers.</span>
     </div>
     </div>
     </div>';

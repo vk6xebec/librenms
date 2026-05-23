@@ -583,14 +583,14 @@ function snmp_gen_auth(&$device, $cmd = [])
             // We have to provide a username anyway (see Net-SNMP doc)
             array_push($cmd, '-u', ! empty($device['authname']) ? $device['authname'] : 'root');
         } elseif ($authlevel === 'authnopriv') {
-            array_push($cmd, '-a', $device['authalgo']);
+            array_push($cmd, '-a', \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm($device['authalgo']));
             array_push($cmd, '-A', $device['authpass']);
             array_push($cmd, '-u', $device['authname']);
         } elseif ($authlevel === 'authpriv') {
-            array_push($cmd, '-a', $device['authalgo']);
+            array_push($cmd, '-a', \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm($device['authalgo']));
             array_push($cmd, '-A', $device['authpass']);
             array_push($cmd, '-u', $device['authname']);
-            array_push($cmd, '-x', $device['cryptoalgo']);
+            array_push($cmd, '-x', \LibreNMS\SNMPCapabilities::normalizeCryptoAlgorithm($device['cryptoalgo']));
             array_push($cmd, '-X', $device['cryptopass']);
         } else {
             d_echo('DEBUG: ' . $device['snmpver'] . " : Unsupported SNMPv3 AuthLevel (wtf have you done ?)\n");

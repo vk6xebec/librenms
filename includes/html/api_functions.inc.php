@@ -457,6 +457,9 @@ function add_device(Illuminate\Http\Request $request)
             $device->location_id = \App\Models\Location::firstOrCreate(['location' => $data['location']])->id;
         }
 
+        $device->authalgo = \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm($device->authalgo);
+        $device->cryptoalgo = \LibreNMS\SNMPCapabilities::normalizeCryptoAlgorithm($device->cryptoalgo);
+
         // uses different name in legacy call
         if (! empty($data['version'])) {
             $device->snmpver = $data['version'];

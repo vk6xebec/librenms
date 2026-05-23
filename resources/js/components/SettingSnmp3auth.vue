@@ -43,13 +43,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="context_name" class="col-sm-3 control-label" v-text="$t('settings.settings.snmp.v3.fields.context_name')"></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="context_name" :value="item.context_name" @input="updateItem(id, $event.target.id, $event.target.value)">
-                    </div>
-                </div>
-
                 <fieldset name="algo" v-show="item.authlevel.toString().substring(0, 4) === 'auth'" :disabled="disabled">
                     <legend class="h4" v-text="$t('settings.settings.snmp.v3.auth')"></legend>
                     <div class="form-group">
@@ -92,6 +85,14 @@
                         </div>
                     </div>
                 </fieldset>
+
+                <div class="form-group">
+                    <label for="context_name" class="col-sm-3 control-label" v-text="$t('settings.settings.snmp.v3.fields.context_name')"></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="context_name" :value="item.context_name" @input="updateItem(id, $event.target.id, $event.target.value)">
+                        <span class="help-block">Only set this if your device requires a context name, for example "Jetdirect" for HP LaserJet printers.</span>
+                    </div>
+                </div>
             </form>
                 </div>
             </div>
@@ -116,10 +117,10 @@ export default {
         data() {
             return {
                 localList: this.value,
-                authAlgorithms: ['MD5', 'AES'],
-                cryptoAlgorithms: ['AES', 'DES'],
-                authAlgorithmLabels: { SHA: 'SHA-1' },
-                cryptoAlgorithmLabels: { AES: 'AES-128' },
+                authAlgorithms: ['MD5', 'SHA', 'SHA-1'],
+                cryptoAlgorithms: ['AES', 'AES-128', 'DES'],
+                authAlgorithmLabels: {},
+                cryptoAlgorithmLabels: {},
             }
         },
         mounted() {

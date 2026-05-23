@@ -60,10 +60,10 @@ if (! empty($_POST['hostname'])) {
                 $new_device->authlevel = strip_tags((string) $_POST['authlevel']);
                 $new_device->authname = $_POST['authname'];
                 $new_device->authpass = $_POST['authpass'];
-                $new_device->authalgo = strip_tags((string) $_POST['authalgo']);
+                $new_device->authalgo = \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm(strip_tags((string) $_POST['authalgo']));
                 $new_device->context_name = trim(strip_tags((string) ($_POST['context_name'] ?? ''))) ?: null;
                 $new_device->cryptopass = $_POST['cryptopass'];
-                $new_device->cryptoalgo = $_POST['cryptoalgo'];
+                $new_device->cryptoalgo = \LibreNMS\SNMPCapabilities::normalizeCryptoAlgorithm($_POST['cryptoalgo']);
 
                 print_message('Adding SNMPv3 host: ' . htmlentities($hostname) . ' port: ' . htmlentities($new_device->port));
             } else {
@@ -249,12 +249,6 @@ foreach (PortAssociationMode::getModes() as $mode) {
             </div>
           </div>
           <div class="form-group">
-            <label for="context_name" class="col-sm-3 control-label">Context Name</label>
-            <div class="col-sm-9">
-              <input type="text" name="context_name" id="context_name" placeholder="Context Name (optional)" class="form-control input-sm" autocomplete="off">
-            </div>
-          </div>
-          <div class="form-group">
             <label for="cryptopass" class="col-sm-3 control-label">Crypto Password</label>
             <div class="col-sm-9">
               <input type="text" name="cryptopass" id="cryptopass" placeholder="Crypto Password" class="form-control input-sm" autocomplete="off">
@@ -274,6 +268,13 @@ foreach (PortAssociationMode::getModes() as $mode) {
               <?php if (! \LibreNMS\SNMPCapabilities::supportsAES256()) {?>
               <label class="text-left"><small>Some options are disabled. <a href="https://docs.librenms.org/Support/FAQ/#optional-requirements-for-snmpv3-sha2-auth">Read more here</a></small></label>
               <?php } ?>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="context_name" class="col-sm-3 control-label">Context Name</label>
+            <div class="col-sm-9">
+              <input type="text" name="context_name" id="context_name" placeholder="Context Name (optional)" class="form-control input-sm" autocomplete="off">
+              <span class="help-block">Only set this if your device requires a context name, for example "Jetdirect" for HP LaserJet printers.</span>
             </div>
           </div>
         </div>

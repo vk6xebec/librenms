@@ -38,6 +38,7 @@ use LibreNMS\Exceptions\HostUnreachablePingException;
 use LibreNMS\Exceptions\HostUnreachableSnmpException;
 use LibreNMS\Exceptions\SnmpVersionUnsupportedException;
 use LibreNMS\Modules\Core;
+use LibreNMS\SNMPCapabilities;
 use SnmpQuery;
 
 class ValidateDeviceAndCreate
@@ -119,6 +120,8 @@ class ValidateDeviceAndCreate
             if ($snmp_version === 'v3') {
                 // Try each set of parameters from config
                 foreach ($v3_credentials as $v3) {
+                    $v3['authalgo'] = SNMPCapabilities::normalizeAuthAlgorithm($v3['authalgo'] ?? null);
+                    $v3['cryptoalgo'] = SNMPCapabilities::normalizeCryptoAlgorithm($v3['cryptoalgo'] ?? null);
                     $this->device->fill(Arr::only($v3, ['authlevel', 'authname', 'authpass', 'authalgo', 'cryptopass', 'cryptoalgo', 'context_name']));
 
                     if (app(DeviceIsSnmpable::class)->execute($this->device)) {

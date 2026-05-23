@@ -7003,9 +7003,9 @@
             ],
             "validate": {
                 "value": "array",
-                "value.*.authalgo": "in:MD5,SHA,SHA-224,SHA-256,SHA-384,SHA-512",
+                "value.*.authalgo": "in:MD5,SHA,SHA-1,SHA-224,SHA-256,SHA-384,SHA-512",
                 "value.*.context_name": "nullable|string|max:128",
-                "value.*.cryptoalgo": "in:AES,AES-192,AES-256,AES-256-C,DES"
+                "value.*.cryptoalgo": "in:AES,AES-128,AES-192,AES-256,AES-256-C,DES"
             }
         },
         "snmp.version": {

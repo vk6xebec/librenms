@@ -99,10 +99,10 @@ class DeviceAdd extends LnmsCommand
             'authlevel' => ($auth ? 'auth' : 'noAuth') . (($priv && $auth) ? 'Priv' : 'NoPriv'),
             'authname' => $this->option('security-name'),
             'authpass' => $this->option('auth-password'),
-            'authalgo' => $this->option('auth-protocol'),
+            'authalgo' => \LibreNMS\SNMPCapabilities::normalizeAuthAlgorithm($this->option('auth-protocol')),
             'context_name' => $this->option('context'),
             'cryptopass' => $this->option('privacy-password'),
-            'cryptoalgo' => $this->option('privacy-protocol'),
+            'cryptoalgo' => \LibreNMS\SNMPCapabilities::normalizeCryptoAlgorithm($this->option('privacy-protocol')),
         ]);
 
         if ($this->option('ping-only')) {

@@ -35,6 +35,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use LibreNMS\Enum\Severity;
+use LibreNMS\SNMPCapabilities;
 use LibreNMS\Util\Debug;
 use LibreNMS\Util\Oid;
 use LibreNMS\Util\Rewrite;
@@ -349,11 +350,11 @@ class NetSnmpQuery implements SnmpQueryInterface
 
             switch (strtolower((string) $this->device->authlevel)) {
                 case 'authpriv':
-                    array_push($cmd, '-x', $this->device->cryptoalgo);
+                    array_push($cmd, '-x', SNMPCapabilities::normalizeCryptoAlgorithm($this->device->cryptoalgo));
                     array_push($cmd, '-X', $this->device->cryptopass);
                     // fallthrough
                 case 'authnopriv':
-                    array_push($cmd, '-a', $this->device->authalgo);
+                    array_push($cmd, '-a', SNMPCapabilities::normalizeAuthAlgorithm($this->device->authalgo));
                     array_push($cmd, '-A', $this->device->authpass);
                     // fallthrough
                 case 'noauthnopriv':
