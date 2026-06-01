@@ -1,0 +1,77 @@
+1.3.6.1.2.1.1.1.0|4|Netgate pfSense Plus
+1.3.6.1.2.1.1.2.0|6|1.3.6.1.4.1.8072.3.2.8
+1.3.6.1.2.1.1.4.0|4|<private>
+1.3.6.1.2.1.1.6.0|4|<private>
+1.3.6.1.2.1.25.3.2.1.3.196608|4|Intel(R) Atom(TM) CPU C3558 @ 2.20GHz
+1.3.6.1.2.1.25.3.2.1.3.196609|4|Intel(R) Atom(TM) CPU C3558 @ 2.20GHz
+1.3.6.1.2.1.25.3.2.1.3.196610|4|Intel(R) Atom(TM) CPU C3558 @ 2.20GHz
+1.3.6.1.2.1.25.3.2.1.3.196611|4|Intel(R) Atom(TM) CPU C3558 @ 2.20GHz
+1.3.6.1.2.1.25.3.2.1.3.262145|4|network interface igc0
+1.3.6.1.2.1.25.3.2.1.3.262146|4|network interface igc1
+1.3.6.1.2.1.25.3.2.1.3.262147|4|network interface igc2
+1.3.6.1.2.1.25.3.2.1.3.262148|4|network interface igc3
+1.3.6.1.2.1.25.3.2.1.3.262149|4|network interface ix0
+1.3.6.1.2.1.25.3.2.1.3.262150|4|network interface ix1
+1.3.6.1.2.1.25.3.2.1.3.262151|4|network interface ix2
+1.3.6.1.2.1.25.3.2.1.3.262152|4|network interface ix3
+1.3.6.1.2.1.25.3.2.1.3.262153|4|network interface enc0
+1.3.6.1.2.1.25.3.2.1.3.262154|4|network interface lo0
+1.3.6.1.2.1.25.3.2.1.3.262155|4|network interface pflog0
+1.3.6.1.2.1.25.3.2.1.3.262156|4|network interface pfsync0
+1.3.6.1.2.1.25.3.2.1.3.262157|4|network interface tun_wg0
+1.3.6.1.2.1.25.3.2.1.3.262158|4|network interface tun_wg1
+1.3.6.1.2.1.25.3.2.1.3.262159|4|network interface tun_wg2
+1.3.6.1.2.1.25.3.2.1.3.262160|4|network interface lagg0
+1.3.6.1.2.1.25.3.2.1.3.262161|4|network interface lagg0.125
+1.3.6.1.2.1.25.3.2.1.3.262162|4|network interface lagg0.135
+1.3.6.1.2.1.25.3.2.1.3.262163|4|network interface lagg0.145
+1.3.6.1.2.1.25.3.2.1.3.262164|4|network interface lagg0.155
+1.3.6.1.2.1.25.3.2.1.3.262165|4|network interface lagg0.165
+1.3.6.1.2.1.25.3.2.1.3.262166|4|network interface lagg0.195
+1.3.6.1.2.1.25.3.2.1.3.262167|4|network interface lagg0.205
+1.3.6.1.2.1.25.3.2.1.3.262168|4|network interface lagg0.215
+1.3.6.1.2.1.25.3.2.1.3.262169|4|network interface lagg0.666
+1.3.6.1.2.1.25.3.2.1.3.262170|4|network interface lagg0.305
+1.3.6.1.2.1.25.3.2.1.3.262171|4|network interface lagg0.315
+1.3.6.1.2.1.25.3.2.1.3.262172|4|network interface lagg0.325
+1.3.6.1.2.1.25.3.2.1.3.262173|4|network interface lagg0.555
+1.3.6.1.2.1.25.3.2.1.3.262174|4|network interface lagg0.335
+1.3.6.1.2.1.25.3.2.1.3.262175|4|network interface lagg0.225
+1.3.6.1.2.1.25.3.2.1.3.262176|4|network interface lagg0.235
+1.3.6.1.2.1.25.3.2.1.3.262177|4|network interface lagg0.245
+1.3.6.1.2.1.25.3.2.1.3.262178|4|network interface lagg0.255
+1.3.6.1.2.1.25.3.2.1.3.262179|4|network interface lagg0.265
+1.3.6.1.2.1.25.3.2.1.3.262180|4|network interface lagg0.777
+1.3.6.1.2.1.25.3.2.1.3.262181|4|network interface lagg0.345
+1.3.6.1.2.1.25.3.2.1.3.262182|4|network interface lagg0.355
+1.3.6.1.2.1.25.3.2.1.3.262183|4|network interface igc0.125
+1.3.6.1.2.1.25.3.2.1.3.262184|4|network interface igc0.135
+1.3.6.1.2.1.25.3.2.1.3.262185|4|network interface igc0.145
+1.3.6.1.2.1.25.3.2.1.3.262186|4|network interface igc0.155
+1.3.6.1.2.1.25.3.2.1.3.262187|4|network interface igc0.165
+1.3.6.1.2.1.25.3.2.1.3.262188|4|network interface igc0.195
+1.3.6.1.2.1.25.3.2.1.3.262189|4|network interface igc0.205
+1.3.6.1.2.1.25.3.2.1.3.262190|4|network interface igc0.215
+1.3.6.1.2.1.25.3.2.1.3.262191|4|network interface igc0.666
+1.3.6.1.2.1.25.3.2.1.3.262192|4|network interface igc0.305
+1.3.6.1.2.1.25.3.2.1.3.262193|4|network interface igc0.315
+1.3.6.1.2.1.25.3.2.1.3.262194|4|network interface igc0.325
+1.3.6.1.2.1.25.3.2.1.3.262195|4|network interface igc0.555
+1.3.6.1.2.1.25.3.2.1.3.262196|4|network interface igc0.335
+1.3.6.1.2.1.25.3.2.1.3.262197|4|network interface igc0.225
+1.3.6.1.2.1.25.3.2.1.3.262198|4|network interface igc0.235
+1.3.6.1.2.1.25.3.2.1.3.262199|4|network interface igc0.245
+1.3.6.1.2.1.25.3.2.1.3.262200|4|network interface igc0.255
+1.3.6.1.2.1.25.3.2.1.3.262201|4|network interface igc0.265
+1.3.6.1.2.1.25.3.2.1.3.262202|4|network interface igc0.777
+1.3.6.1.2.1.25.3.2.1.3.262203|4|network interface igc0.345
+1.3.6.1.2.1.25.3.2.1.3.262204|4|network interface igc0.355
+1.3.6.1.2.1.25.3.2.1.3.262205|4|network interface ovpns1
+1.3.6.1.2.1.25.3.2.1.3.262206|4|network interface ovpns2
+1.3.6.1.2.1.25.3.2.1.3.262207|4|network interface tailscale0
+1.3.6.1.2.1.25.3.2.1.3.786432|4|Guessing that there's a floating point co-processor
+1.3.6.1.2.1.25.3.3.1.2.196608|2|18
+1.3.6.1.2.1.25.3.3.1.2.196609|2|26
+1.3.6.1.2.1.25.3.3.1.2.196610|2|25
+1.3.6.1.2.1.25.3.3.1.2.196611|2|24
+1.3.6.1.2.1.25.6.3.1.2.200|4|pfSense-26.03
