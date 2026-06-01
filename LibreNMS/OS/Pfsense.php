@@ -26,6 +26,7 @@
 
 namespace LibreNMS\OS;
 
+use App\Models\Device;
 use LibreNMS\Interfaces\Data\DataStorageInterface;
 use LibreNMS\Interfaces\Polling\OSPolling;
 use LibreNMS\OS\Shared\Unix;
@@ -33,6 +34,80 @@ use LibreNMS\RRD\RrdDefinition;
 
 class Pfsense extends Unix implements OSPolling
 {
+    private const HOST_RESOURCES_CPU_DEVICE_INDEX = 196608;
+    private const HOST_RESOURCES_PFSENSE_PACKAGE_INDEX = 200;
+
+    public function discoverOS(Device $device): void
+    {
+        parent::discoverOS($device);
+
+        $this->discoverVersionFromPackages($device);
+        $this->discoverHardwareFromHostResources($device);
+    }
+
+    private function discoverVersionFromPackages(Device $device): void
+    {
+        if (! empty($device->version) && ! $this->normalizePfsenseVersion($device->version)) {
+            return;
+        }
+
+        $version = $this->validSnmpValue(snmp_get($this->getDeviceArray(), 'HOST-RESOURCES-MIB::hrSWInstalledName.' . self::HOST_RESOURCES_PFSENSE_PACKAGE_INDEX, '-Oqv'));
+        $version = $this->normalizePfsenseVersion($version);
+        if ($version !== null) {
+            $device->version = $version;
+
+            return;
+        }
+
+        foreach (snmpwalk_cache_oid($this->getDeviceArray(), 'hrSWInstalledName', [], 'HOST-RESOURCES-MIB') as $package) {
+            $version = $this->normalizePfsenseVersion($package['hrSWInstalledName'] ?? null);
+            if ($version !== null) {
+                $device->version = $version;
+
+                return;
+            }
+        }
+    }
+
+    private function discoverHardwareFromHostResources(Device $device): void
+    {
+        if (! empty($device->hardware) && ! $this->isArchitectureOnlyHardware($device->hardware)) {
+            return;
+        }
+
+        $hardware = $this->validSnmpValue(snmp_get($this->getDeviceArray(), 'HOST-RESOURCES-MIB::hrDeviceDescr.' . self::HOST_RESOURCES_CPU_DEVICE_INDEX, '-Oqv'));
+        if ($hardware !== null) {
+            $device->hardware = $hardware;
+        }
+    }
+
+    private function isArchitectureOnlyHardware(string $hardware): bool
+    {
+        return preg_match('/^(?:aarch64|alpha|amd64|arm\w*|i386|ia64|mips\w*|pc98|powerpc\w*|risc\w*|sparc\w*)$/i', trim($hardware)) === 1;
+    }
+
+    private function normalizePfsenseVersion(string|false|null $version): ?string
+    {
+        $version = $this->validSnmpValue($version);
+
+        if ($version !== null && preg_match('/^pfSense(?:-base)?-(?<version>\d+(?:\.\d+)+.*)$/', $version, $matches)) {
+            return $matches['version'];
+        }
+
+        return null;
+    }
+
+    private function validSnmpValue(string|false|null $value): ?string
+    {
+        $value = trim((string) $value, "\" \n\r\t");
+
+        if ($value === '' || str_contains($value, 'No Such') || str_contains($value, 'No more variables left')) {
+            return null;
+        }
+
+        return $value;
+    }
+
     public function pollOS(DataStorageInterface $datastore): void
     {
         $oids = snmp_get_multi($this->getDeviceArray(), [
